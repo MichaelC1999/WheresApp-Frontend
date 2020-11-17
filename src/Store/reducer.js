@@ -16,6 +16,7 @@ const reducer = (state = initialState, action)=> {
                 modalType: actionTypes.ADD_POST
             }
         case actionTypes.SINGLE_POST:
+            console.log(action.postData)
             return {
                 ...state,
                 modalType: actionTypes.SINGLE_POST,
