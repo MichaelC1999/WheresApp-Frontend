@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  margin: 0;
+  background: white;
+  color: rgb(201, 41, 41);
+}
+
+img {
+  border: 1px black solid;
+  padding: 0;
+}
+
+a {
+  color: rgb(201, 41, 41);
+
+}
+
+a:hover{
+  color: rgb(201, 41, 41);
+  background-color: white;
+}
+
+a:active {
+  background-color: rgb(201, 41, 41);
+  color: white;
+  border: rgba(159, 173, 159, 0.938) 1px solid;
+  border-radius: 3px;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.page-header1 {
+  margin: 30px;
+  text-align: center;
+}
+
+html[xmlns] .clearfix {
+  display: block;
+}
+
+* html .clearfix {
+  height: 1%;
+}
+
+.slide-in-left-enter {
+  transform: translateX(-100%);
+}
+
+.slide-in-left-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 1000ms;
+}
+
+.slide-in-left-exit {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.slide-in-left-exit-active {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 200ms;
+}
+
+.center {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

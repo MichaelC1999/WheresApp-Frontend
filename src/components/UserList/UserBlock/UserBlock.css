@@ -1,0 +1,55 @@
+.UserListBlock img {
+    width: 95%;
+    margin-top: 2.5%;
+}
+
+.UserListBlock {
+    height: 100%;
+    border: black 1px solid;
+    margin: 6px;
+    background-color: rgb(203, 224, 224);
+    flex: 1;
+}
+
+/* .UserListBlock > * {
+    color: ;
+} */
+
+.user-row {
+    background-color: rgb(203, 224, 224);
+    border: 1px black solid;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 900px)  {
+    .UserListBlock {
+        border: 0;
+        width: 300px;
+        padding-top: 10px;
+        min-height: 300px;
+        margin-bottom: 30px;
+    }
+
+    .UserListBlock:hover{
+        border: black 2px solid;
+        background-color: rgb(201, 41, 41);
+        color: black;
+    }
+
+    
+
+    .user-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    
+}
+
+@media (min-width: 1230px) {
+    .UserListBlock {
+        width: 400px;
+    }
+}

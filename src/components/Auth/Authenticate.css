@@ -1,0 +1,41 @@
+.authForm {
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+
+}
+
+.authForm > input, .authForm > button {
+    text-align: center;
+    margin: auto;
+    display: block;
+    width: 90%;
+    padding: 5px 2px;
+    
+}
+
+.authForm > input:focus{
+    color: white;
+    background-color: rgba(206, 80, 80, 0.774);
+}
+
+.Auth {
+    text-align: center;
+    margin-top: 40px;
+}
+
+form {
+    text-align: center;
+    display: inline-block;
+}
+
+@media (min-width: 900px) {
+    .authForm {
+        width: 80%;
+    }
+    .authForm > input, .authForm > button {
+        width: 50%;
+        padding: 10px 5px;
+    }
+}
