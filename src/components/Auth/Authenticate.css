@@ -6,9 +6,14 @@
 
 }
 
-.authForm > input, .authForm > button {
+.authForm > div > label {
+    text-align: left;
+    font-size: 20px;
+}
+
+.authForm > input, .authForm > button, .authForm > div {
     text-align: center;
-    margin: auto;
+    margin: 10px auto;
     display: block;
     width: 90%;
     padding: 5px 2px;
@@ -16,8 +21,8 @@
 }
 
 .authForm > input:focus{
-    color: white;
-    background-color: rgba(206, 80, 80, 0.774);
+    color: red;
+    background-color: white;
 }
 
 .Auth {
@@ -34,7 +39,7 @@ form {
     .authForm {
         width: 80%;
     }
-    .authForm > input, .authForm > button {
+    .authForm > input, .authForm > button, .authForm > div {
         width: 50%;
         padding: 10px 5px;
     }

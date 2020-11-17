@@ -15,6 +15,7 @@ class Authenticate extends React.Component {
 
 
     updateInput = (input) => {
+        console.log(input)
         if(input.target.name!=="image"){
             this.setState({[input.target.name]: input.target.value});
         }
@@ -157,17 +158,23 @@ class Authenticate extends React.Component {
        
         return (
             <div className="Auth">
-                <h2>{this.state.authType}</h2>
+                <h1>{this.state.authType}</h1>
                 <h3 style={{color: "red"}}>{this.state.error || this.state.message}</h3>
                 <form className="authForm" onSubmit={this.submitAuth}>
                     {this.state.authType === "Signup" ? <React.Fragment>
-                        <input style={{marginBottom: "20px"}} type="file" name="image" accept=".jpg, .jpeg, .png" />
-                        <input style={{display: "block"}} type="text" placeholder="Name" name="name" value={this.state.name} onChange={this.updateInput.bind()} />
+                        <div style={{border: "black 2px solid"}}>
+                            <label style={{marginBottom: "15"}} for="image">Profile image</label>
+
+                            <input style={{margin: "auto"}} type="file" name="image" accept=".jpg, .jpeg, .png" />
+                        </div>
+                        <input style={this.state.name ? {backgroundColor: "lime", color: "white"} : {border: "red 2px solid"}} type="text" placeholder="Name" name="name" value={this.state.name} onChange={this.updateInput.bind()} />
+                        
+                        
                         
                         </React.Fragment> : null }
 
-                    <input style={this.state.email.includes('@') && this.state.email.includes('.') ? {border: "2px lime solid"} : {border: "2px red solid"}} type="text" placeholder="Email" name="email" value={this.state.email} onChange={this.updateInput.bind()} />
-                    <input style={this.state.password.length > 8 && this.state.password.length < 30 ? {border: "2px lime solid"} : {border: "2px red solid"}} type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.updateInput.bind()} />
+                    <input style={this.state.email.includes('@') && this.state.email.includes('.') ? {backgroundColor: "lime", color: "white"} : {border: "red 2px solid"}} type="text" placeholder="Email" name="email" value={this.state.email} onChange={this.updateInput.bind()} />
+                    <input style={this.state.password.length > 8 && this.state.password.length < 30 ? {backgroundColor: "lime", color: "white"} : {border: "red 2px solid"}} type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.updateInput.bind()} />
 
                     <button type="submit" >Submit</button>
                     <button onClick={this.switchAuth} >Switch to {this.state.authType === "Login" ? "Signup" : "Login" }</button>
