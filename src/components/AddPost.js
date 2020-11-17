@@ -10,12 +10,7 @@ class AddPost extends React.Component {
         location: "",
         imageUrl: null,
         desc: "",
-        showImageInput: true,
-        valid: {
-            title: false,
-            location: false,
-            desc: false
-        }
+        showImageInput: true
     }
 
     componentDidMount () {
@@ -38,31 +33,15 @@ class AddPost extends React.Component {
         console.log(e.target)
         if(e.target.name!=="image"){
             this.setState({[e.target.name] : e.target.value})
-            if(e.target.name==="title" && this.state.title.length>=5){
-                this.setState({valid: {...this.state.valid, title: true}})
-            } else if(e.target.name==="title" && this.state.title.length<5){
-                this.setState({valid: {...this.state.valid, title: false}})
-            }
-            console.log(e.target.name)
-            if(e.target.name==="location" && this.state.location.length>=3){
-                this.setState({valid: {...this.state.valid, location: true}})
-                
-            } else if(e.target.name==="location" && this.state.location.length<3){
-                this.setState({valid: {...this.state.valid, location: false}})
-            }
-
-            if(e.target.name==="desc" && this.state.desc.length>=10){
-                this.setState({valid: {...this.state.valid, desc: true}})
-            } else if(e.target.name==="desc" && this.state.desc.length<10){
-                this.setState({valid: {...this.state.valid, desc: false}})
-            }
+            
         } 
         
     }
 
     submitHandler = (e) => {
         e.preventDefault();
-        if(!this.state.valid.title || !this.state.valid.desc || !this.state.valid.location){
+        if(this.state.title.length <= 5 || this.state.desc.length <=10 || this.state.location <= 3){
+            console.log(this.state)
             this.setState({error: "Invalid inputs"})
             return ;
         }
@@ -85,6 +64,7 @@ class AddPost extends React.Component {
             return
         }
         if(this.props.postData.postId){
+            console.log("REVISE POST")
             //if this.props.postID, put request to api/posts/:postID with state values attached as form data, to update old Post object with same ID
             //make put request, in controller figure out if formData 'image' is the same as legacy value. If same, return. If different, go through image upload method.
             //SEE NOTE BY POST REQ
@@ -124,6 +104,7 @@ class AddPost extends React.Component {
                 this.setState({error: err.message})
             })
         } else {
+            console.log("ADDING NEW POST")
             //if no postID, post request to api/posts with values attached as form data, to create new post object in Post model
             //NOTE: FEED PROJECT CREATEPOST REQ HAS DIFFERENT HEADERS WITH BEARER AUTHORIZATION, MAYBE SOURCE OF ISSUE???
             fetch('https://wheresapp-backend.herokuapp.com/posts', {
@@ -166,7 +147,9 @@ class AddPost extends React.Component {
         let error
         if(this.state.error){
             error = <h2>{this.state.error}</h2>
+
         }
+        console.log(this.state.desc.length)
         return (
             <div className="post-modal">
                 {this.props.postData.postId ? <h1>Edit Post</h1> : <h1>New Post</h1>}
@@ -176,7 +159,7 @@ class AddPost extends React.Component {
                     <input type="text" name="title" placeholder="Post Title" value={this.state.title} onChange={this.changeHandler.bind()} />
                     {this.state.location.length <= 3 && this.state.error ? <label for="location">Location must be more than 3 characters</label> : null }
                     <input type="text" name="location" placeholder="Location" value={this.state.location} onChange={this.changeHandler.bind()} />
-                    {this.state.valid.desc <=10 && this.state.error ? <label for="Desc">Post description must be more than 10 characters</label> : null }
+                    {this.state.desc.length <=10 && this.state.error ? <label for="Desc">Post description must be more than 10 characters</label> : null }
                     <textarea style={{height: 100}} name="desc" placeholder="Description" value={this.state.desc} onChange={this.changeHandler.bind()}  />
                     {this.state.showImageInput ? <input type="file" name="image" onChange={this.changeHandler.bind()}/> : <h4 onClick={this.showImageInput}>Would you like to upload a different photo? Click on this text</h4>}
                     <button type="submit">Submit</button>
