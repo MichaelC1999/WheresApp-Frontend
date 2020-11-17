@@ -1,5 +1,6 @@
 import React from 'react';
 import Post from './MainFeedPosts/Post';
+import Loader from '../UI/Loader/Loader';
 import './MainFeed.css';
 
 class MainFeed extends React.Component {
@@ -30,9 +31,6 @@ class MainFeed extends React.Component {
             console.log(err.message)
             this.setState({error: err.message})
         })
-        //Set all (or limit w/pagination) posts received from fetch to this.state.posts
-
-        //this.setState({posts: [{_id: 1, title: "Test Post", imgUrl: "https://i.imgur.com/Z3p50nu.png", user: "cm172596", desc: "lorem ipsum chipsum niggas siggin fouh tees"}, {_id: 2, title: "Test Post", imgUrl: "https://i.imgur.com/Z3p50nu.png", user: "cm172596", desc: "lorem ipsum chipsum niggas siggin fouh tees"}, {_id: 3, title: "Test Post", imgUrl: "https://i.imgur.com/Z3p50nu.png", user: "cm172596", desc: "lorem ipsum chipsum niggas siggin fouh tees"}, {_id: 4, title: "Test Post", imgUrl: "https://i.imgur.com/Z3p50nu.png", user: "cm172596", desc: "lorem ipsum chipsum niggas siggin fouh tees"}, {_id: 5, title: "Test Post", imgUrl: "https://i.imgur.com/Z3p50nu.png", user: "cm172596", desc: "lorem ipsum chipsum niggas siggin fouh tees"}, {_id: 6, title: "Test Post", imgUrl: "https://i.imgur.com/Z3p50nu.png", user: "cm172596", desc: "lorem ipsum chipsum niggas siggin fouh tees"}]})
     }
     
     
@@ -47,9 +45,8 @@ class MainFeed extends React.Component {
                 return <Post imageUrl={post.imageUrl} title={post.title} desc={post.desc} postCreatorId={post.creator._id} userName={post.creator.name} location={post.location} postId={post._id}/>
             })
         } else {
-            posts = <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            posts = <Loader />
         }
-        
 
         return (
             <React.Fragment>

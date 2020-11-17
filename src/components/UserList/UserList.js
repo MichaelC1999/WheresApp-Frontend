@@ -1,6 +1,6 @@
 import React from 'react';
 import UserBlock from './UserBlock/UserBlock';
-
+import Loader from '../UI/Loader/Loader';
 
 class UserList extends React.Component {
     
@@ -41,14 +41,20 @@ class UserList extends React.Component {
     render() {
         let counter = 0;
         let breaker = false;
-        const users = this.state.users.map( user => {
-            console.log(user.avatarImg)
-            ++counter;
-            if(counter%3==0){
-                breaker = true;
-            }
-            return <UserBlock breaker={breaker} userId={user._id} name={user.name} postTotal={user.posts.length} avatarImg={user.avatarImg} bio={user.bio} />
-        })
+        let users;
+        if(this.state.users.length == 0){
+            users = <Loader />
+        } else if(this.state.users.length > 0){
+            users = this.state.users.map( user => {
+                console.log(user.avatarImg)
+                ++counter;
+                if(counter%3==0){
+                    breaker = true;
+                }
+                return <UserBlock breaker={breaker} userId={user._id} name={user.name} postTotal={user.posts.length} avatarImg={user.avatarImg} bio={user.bio} />
+            })
+        }
+        
 
         return (
             <div style={{textAlign: "center"}}>
