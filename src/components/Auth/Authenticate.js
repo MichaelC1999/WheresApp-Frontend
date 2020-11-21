@@ -15,9 +15,12 @@ class Authenticate extends React.Component {
 
 
     updateInput = (input) => {
-        console.log(input)
+        console.log(input.target.value)
+        
         if(input.target.name!=="image"){
             this.setState({[input.target.name]: input.target.value});
+        } else if(input.target.name=="image"){
+            this.setState({image: input.target.value})
         }
     }
 
@@ -144,6 +147,10 @@ class Authenticate extends React.Component {
 
     submitAuth =  (e) => {
         e.preventDefault();
+        if(!this.state.image && this.state.authType === "Signup"){
+            this.setState({error: "No profile picture selected"});
+            return ;
+        }
         this.setState({error: null})
         this.setState({message: "Loading..."})
         if(this.state.authType === "Login") {
@@ -163,18 +170,20 @@ class Authenticate extends React.Component {
                 <form className="authForm" onSubmit={this.submitAuth}>
                     {this.state.authType === "Signup" ? <React.Fragment>
                         <div style={{border: "black 2px solid"}}>
-                            <label style={{marginBottom: "15"}} for="image">Profile image</label>
+                            <label style={this.state.image ? {marginBottom: "15", color: "lime"} : {marginBottom: "15"}} for="image">Profile image</label>
 
-                            <input style={{margin: "auto"}} type="file" name="image" accept=".jpg, .jpeg, .png" />
+                            <input style={this.state.image ? {margin: "auto", color: "lime"} : {margin: "auto"}} type="file" name="image" accept=".jpg, .jpeg, .png" onChange={this.updateInput.bind()}/>
                         </div>
+                        <label style={this.state.name ? {color: "lime"}: null } for="name">Username</label>
                         <input style={this.state.name ? {backgroundColor: "lime", color: "white"} : {border: "red 2px solid"}} type="text" placeholder="Name" name="name" value={this.state.name} onChange={this.updateInput.bind()} />
                         
                         
                         
                         </React.Fragment> : null }
-
+                    <label style={this.state.email.includes('@') && this.state.email.includes('.') ? {color: "lime"} : null}for="email" >Email (ex. abc123@gmail.com)</label>
                     <input style={this.state.email.includes('@') && this.state.email.includes('.') ? {backgroundColor: "lime", color: "white"} : {border: "red 2px solid"}} type="text" placeholder="Email" name="email" value={this.state.email} onChange={this.updateInput.bind()} />
-                    <input style={this.state.password.length > 8 && this.state.password.length < 30 ? {backgroundColor: "lime", color: "white"} : {border: "red 2px solid"}} type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.updateInput.bind()} />
+                    <label style={this.state.password.length >= 8 && this.state.password.length <= 30 ? {color: "lime"} : null} for="password" >Password (8-30 letters)</label>
+                    <input style={this.state.password.length >= 8 && this.state.password.length <= 30 ? {backgroundColor: "lime", color: "white"} : {border: "red 2px solid"}} type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.updateInput.bind()} />
 
                     <button type="submit" >Submit</button>
                     <button onClick={this.switchAuth} >Switch to {this.state.authType === "Login" ? "Signup" : "Login" }</button>

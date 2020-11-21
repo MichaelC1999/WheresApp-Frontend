@@ -20,14 +20,16 @@
     border: 1px black solid;
     display: flex;
     flex-direction: column;
+    padding: 10px 0;
 }
 
 @media (min-width: 900px)  {
     .UserListBlock {
-        border: 0;
+        border: 2px rgb(203, 224, 224) solid;
         width: 300px;
         padding-top: 10px;
         min-height: 300px;
+        margin: 0;
         margin-bottom: 30px;
     }
 
@@ -35,7 +37,9 @@
         border: black 2px solid;
         background-color: rgb(201, 41, 41);
         color: black;
+        text-decoration: none;
     }
+    
 
     
 
