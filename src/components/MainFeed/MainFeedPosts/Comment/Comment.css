@@ -19,7 +19,7 @@
     margin-left: 10px;
 }
 .comment > .commentBtn {
-    width: 10%;
+    width: 100%;
 }
 .commentBtn > button {
     width: 100%;
@@ -41,4 +41,8 @@
         margin-left: 0;
         max-height: 100px;
     }
+    .comment > .commentBtn {
+        width: 10%;
+    }
+    
 }
