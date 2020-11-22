@@ -1,11 +1,18 @@
-import React from 'react'
-import {connect} from 'react-redux'
+import React from 'react';
+import {connect} from 'react-redux';
+import './CommentBox.css';
 
 class CommentInput extends React.Component {
     state = {
         comment: ""
     }
     
+    componentDidMount () {
+        if(this.props.method == "edit"){
+            this.setState({comment: this.props.comment})
+        }
+    }
+
     stateHandler = (e) => {
         this.setState({comment: e.target.value})
     }
@@ -20,11 +27,16 @@ class CommentInput extends React.Component {
         }
 
         const formData = new FormData();
+
+
         formData.append('comment', this.state.comment);
         formData.append('userId', this.props.currentUserId)
 
-        fetch('https://wheresapp-backend.herokuapp.com/posts/' + this.props.postId + '/newComment', {
-                method: 'POST',
+        const url = 'https://wheresapp-backend.herokuapp.com/posts/' + this.props.postId + '/newComment'
+        const method = "POST"
+
+        fetch(url, {
+                method: method,
                 headers: {
                     authorization: 'Bearer ' + this.props.token
                 },
@@ -37,7 +49,8 @@ class CommentInput extends React.Component {
 
         }).then(resData => {
             console.log(resData)
-            // window.location.reload() 
+            
+            window.location.reload() 
         }).catch(err => {
             this.setState({error: err.message})
         })
@@ -45,14 +58,12 @@ class CommentInput extends React.Component {
 
     render() {
         return (
-            <div className="noClick">
-                <form className="noClick" onSubmit={this.submitComment.bind()}>
+                <form className="commentBox noClick" onSubmit={this.submitComment.bind()}>
                     {this.state.error ? <label style={{color: "red"}} for="comment">{this.state.error}</label> : null}
                     <textarea className="noClick" name="comment" value={this.state.comment} onChange={this.stateHandler.bind()} placeholder="Comment here"/>
                     <button className="noClick" type="submit">Add comment</button>
                 </form>
 
-            </div>
         )
     }
 }

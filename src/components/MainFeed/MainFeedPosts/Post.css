@@ -1,9 +1,14 @@
-.MainFeedPost img {
+.fit-img {
     width: 100%;
     
 }
 
-
+.commentList {
+    background-color: red;
+    padding: 15px 0;
+    border: 1px black solid;
+    margin-bottom: 15px;
+}
 
 .MainFeedPost {
     border-bottom: 1px black solid;
@@ -56,9 +61,9 @@
 }
 
 @media (min-width: 900px){
-    .MainFeedPost img {
+    /* .MainFeedPost img {
         width: 100%;
-    }
+    } */
     /* .MainFeedPost {
         flex-direction: row;
     } */
@@ -73,5 +78,8 @@
 
     .postObj > button {
         flex-direction: column;
+    }
+    .commentList {
+        padding: 15px;
     }
 }

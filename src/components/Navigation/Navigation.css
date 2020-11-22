@@ -34,6 +34,10 @@ li > .active {
     border-radius: 9%;
 }
 
+.navbar-name:hover, .navbar-name:active{
+    text-decoration: none;
+}
+
 .container-fluid {
     align-items: center;
 }

@@ -1,0 +1,34 @@
+.commentBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+
+.commentBox > textarea {
+    width: 100%;
+    height: 75px;
+}
+
+.commentBox > button {
+    width: 100%;
+}
+
+@media (min-width: 900px) {
+    .commentBox {
+        flex-direction: row;
+    }
+    .commentBox > textarea {
+        width: 90%;
+        height: 55px;
+    }
+    .commentBox > textarea:focus {
+        height: 130px;
+    }
+    
+    .commentBox > button {
+        width: 10%;
+    }
+}

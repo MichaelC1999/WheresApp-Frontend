@@ -62,6 +62,7 @@ class MainFeed extends React.Component {
         
         if(this.state.posts){
             posts = this.state.posts.map( post => {
+                console.log(post.comments)
                 return <Post imageUrl={post.imageUrl} comments={post.comments} date={post.createdAt.split("T")[0]} title={post.title} desc={post.desc} postCreatorId={post.creator._id} userName={post.creator.name} location={post.location} postId={post._id}/>
             })
         } else if(!this.state.error){

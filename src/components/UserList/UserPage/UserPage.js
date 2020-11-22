@@ -65,7 +65,7 @@ class UserPage extends React.Component {
             return response.json()
         }).then(resData => {
             console.log(resData)
-            this.setState({user: resData.user})
+            this.setState({user: resData.user, posts: resData.posts})
         }).catch(err => {
             console.log(err.message);
             this.setState({error: err.message});
@@ -73,7 +73,7 @@ class UserPage extends React.Component {
     }
 
     render () {
-        //loop through user.posts, map them into Post components to render
+        //loop through posts, map them into Post components to render
         let loaded = null
         let bio;
         console.log(this.props.match)
@@ -106,10 +106,10 @@ class UserPage extends React.Component {
                             {bio}
                         </div>  
                         <div className="postFeed col-sm-7">
-                            {this.state.user.posts.length == 0 ? <h1 style={{textAlign: "center"}}>No posts have been made by this user</h1> : null}
-                            {this.state.user.posts.map(post => {
+                            {this.state.posts.length == 0 ? <h1 style={{textAlign: "center"}}>No posts have been made by this user</h1> : null}
+                            {this.state.posts.map(post => {
                                 
-                                return <Post imageUrl={post.imageUrl} title={post.title} desc={post.desc} postCreatorId={this.state.user._id} userName={this.state.user.name} location={post.location} postId={post._id}/>
+                                return <Post imageUrl={post.imageUrl}  date={post.createdAt.split("T")[0]} comments={post.comments} title={post.title} desc={post.desc} postCreatorId={this.state.user._id} userName={this.state.user.name} location={post.location} postId={post._id}/>
                             })}
                         </div>
                     </div>

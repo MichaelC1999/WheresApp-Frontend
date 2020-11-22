@@ -3,7 +3,8 @@ import * as actionTypes from '../../../Store/actionTypes';
 import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 import LazyLoad from 'react-lazy-load';
-import CommentBox from '../../UI/CommentBox/CommentBox'
+import CommentBox from '../../UI/CommentBox/CommentBox';
+import Comment from './Comment/Comment';
 import './Post.css';
 
 class Post extends React.Component {
@@ -28,6 +29,7 @@ class Post extends React.Component {
         if(e.target.className == "noClick" || e.target.className == "postObj"){
             return ;
         }
+        //HAVE TO EDIT VIEW POST/ACTION, ONLY NEEDS POST IMAGE
         this.props.viewPost(
             this.props.postId, 
             this.props.title, 
@@ -41,10 +43,10 @@ class Post extends React.Component {
     render() {
         
         let comments = null
-
+        console.log(this.props)
         if(this.props.comments.length>=1){
             comments = this.props.comments.map(comment => {
-                return <h2>{comment.content} - {comment.creator.name}</h2>
+                return <Comment creator={comment.creator} content={comment.content} />
             })
         }
         
@@ -59,7 +61,7 @@ class Post extends React.Component {
                                 
                                 debounce={false}
                                 offsetVertical={300}>
-                                <img className="img-fluid" src={this.props.imageUrl} alt="Post img"/>
+                                <img className="fit-img img-fluid" src={this.props.imageUrl} alt="Post img"/>
                             </LazyLoad>
                         </div>
                         <div className="post-flex-item post-info">
@@ -69,7 +71,7 @@ class Post extends React.Component {
 
                             <h5>Posted at {this.props.date}</h5>
                             <p>{this.props.desc}</p>
-                            {comments}
+                            {comments ? <div className="commentList">{comments}</div> : null}
                             {this.props.currentUserId ? <CommentBox className={"noClick"} postId={this.props.postId} /> : null}
                         </div>
                     </div>
