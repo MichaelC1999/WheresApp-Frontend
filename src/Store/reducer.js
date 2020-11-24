@@ -10,20 +10,17 @@ const initialState = {
 const reducer = (state = initialState, action)=> {
     switch(action.type){
         case actionTypes.ADD_POST:
-            console.log("ADDPOST triggered")
             return {
                 ...state,
                 modalType: actionTypes.ADD_POST
             }
         case actionTypes.SINGLE_POST:
-            console.log(action.postData)
             return {
                 ...state,
                 modalType: actionTypes.SINGLE_POST,
                 postData: action.postData
             }
         case actionTypes.EDIT_POST:
-            console.log('edit post');
             return {
                 ...state,
                 modalType: actionTypes.EDIT_POST,
@@ -36,14 +33,12 @@ const reducer = (state = initialState, action)=> {
                 postData: {postId: action.postId}
             }
         case actionTypes.CLOSE_MODAL:
-            console.log('close model hit')
             return {
                 ...state,
                 postData: {},
                 modalType: null
             }
         case actionTypes.USER_LOGIN:
-            console.log('user login', action.token)
             return {
                 ...state,
                 token: action.token,

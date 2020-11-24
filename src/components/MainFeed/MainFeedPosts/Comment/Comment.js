@@ -32,7 +32,6 @@ class Comment extends React.Component {
 
 
     render () {
-        console.log(this.props)
 
         //ONCE EDIT COMMENT FEATURE IS ENABLED, PUT THIS INTO THE FRAGMENT IN COMMENT VAR BELOW
         //{this.props.currentUserId === this.props.creator._id ? <div className="commentBtn"><button onClick={this.editComment}>Revise</button><button>Remove</button></div> : null}

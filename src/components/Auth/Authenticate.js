@@ -15,11 +15,10 @@ class Authenticate extends React.Component {
 
 
     updateInput = (input) => {
-        console.log(input.target.value)
         
         if(input.target.name!=="image"){
             this.setState({[input.target.name]: input.target.value});
-        } else if(input.target.name=="image"){
+        } else if(input.target.name==="image"){
             this.setState({image: input.target.value})
         }
     }
@@ -28,10 +27,8 @@ class Authenticate extends React.Component {
 
     switchAuth = (e) => {
         e.preventDefault();
-        console.log(this.state.authType)
         const authType = this.state.authType === "Login" ? "Signup" : "Login"; 
         this.setState({authType: authType, error: null});
-        console.log(this.state.authType);
     }
 
     validInputs = () => {
@@ -42,7 +39,6 @@ class Authenticate extends React.Component {
             this.setState({error: "Not a valid email address. Example: abcd1234@gmail.com"})
         }
 
-        console.log('valid inputs run')
     }
 
     validEmail = (email) => {        
@@ -51,8 +47,6 @@ class Authenticate extends React.Component {
     }
 
     submitLogin = (e) => {
-
-        console.log(this.state.email)
         
         //post request to api/login
         //backend find user by email
@@ -109,7 +103,6 @@ class Authenticate extends React.Component {
         await this.validInputs();
         
         if(this.state.error){
-            console.log('hit')
             return ;
         }
         //post request to api/users
@@ -152,7 +145,6 @@ class Authenticate extends React.Component {
             this.setState({error: "No profile picture selected"});
             return ;
         }
-        console.log(this.state.email)
         await this.setState({error: null, email: this.state.email.toLowerCase(), message: "Loading..."}, () => console.log(this.state.email))
 
         if(this.state.authType === "Login") {

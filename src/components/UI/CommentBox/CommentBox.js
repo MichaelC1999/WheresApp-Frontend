@@ -8,7 +8,7 @@ class CommentInput extends React.Component {
     }
     
     componentDidMount () {
-        if(this.props.method == "edit"){
+        if(this.props.method === "edit"){
             this.setState({comment: this.props.comment})
         }
     }
@@ -33,7 +33,7 @@ class CommentInput extends React.Component {
 
         formData.append('comment', this.state.comment);
 
-        if(this.props.method == "edit") {
+        if(this.props.method === "edit") {
             formData.append('commentId', this.props.commentId);
 
             url = 'https://wheresapp-backend.herokuapp.com/posts/' + this.props.postId + '/editComment'
@@ -60,7 +60,6 @@ class CommentInput extends React.Component {
             return response.json();
 
         }).then(resData => {
-            console.log(resData)
             
             window.location.reload() 
         }).catch(err => {
@@ -74,7 +73,7 @@ class CommentInput extends React.Component {
                     {this.state.error ? <label style={{color: "red"}} for="comment">{this.state.error}</label> : null}
                     <textarea name="comment" value={this.state.comment} onChange={this.stateHandler.bind()} placeholder="Comment here"/>
                     <button type="submit">Add comment</button>
-                    {this.props.method=="edit" ? <button onClick={this.props.cancelEdit}>Cancel</button> : null}
+                    {this.props.method==="edit" ? <button onClick={this.props.cancelEdit}>Cancel</button> : null}
                 </form>
 
         )

@@ -42,16 +42,15 @@ class UserList extends React.Component {
         let counter = 0;
         let breaker = false;
         let users;
-        if(this.state.users.length == 0){
+        if(this.state.users.length === 0){
             users = <Loader />
         } else if(this.state.users.length > 0){
-            users = this.state.users.map( user => {
-                console.log(user.avatarImg)
+            users = this.state.users.map((user, idx) => {
                 ++counter;
-                if(counter%3==0){
+                if(counter%3===0){
                     breaker = true;
                 }
-                return <UserBlock breaker={breaker} userId={user._id} name={user.name} postTotal={user.posts.length} avatarImg={user.avatarImg} bio={user.bio} />
+                return <UserBlock key={idx} breaker={breaker} userId={user._id} name={user.name} postTotal={user.posts.length} avatarImg={user.avatarImg} bio={user.bio} />
             })
         }
         

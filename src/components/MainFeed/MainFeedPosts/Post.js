@@ -25,7 +25,6 @@ class Post extends React.Component {
     }
 
     viewPost = (e) => {
-        console.log(e.target.className)
         
         //HAVE TO EDIT VIEW POST/ACTION, ONLY NEEDS POST IMAGE
         this.props.viewPost(
@@ -35,16 +34,14 @@ class Post extends React.Component {
             this.props.desc, 
             this.props.imageUrl
         );
-        console.log(this.props)
     }
     
     render() {
         
         let comments = null
-        console.log(this.props)
         if(this.props.comments.length>=1){
-            comments = this.props.comments.map(comment => {
-                return <Comment commentId={comment._id} postId={this.props.postId} creator={comment.creator} content={comment.content} />
+            comments = this.props.comments.map((comment, idx) => {
+                return <Comment key={idx} commentId={comment._id} postId={this.props.postId} creator={comment.creator} content={comment.content} />
             })
         }
         
@@ -54,7 +51,7 @@ class Post extends React.Component {
                     <div className="post-flex-group" style={{textAlign: "left"}}>
 
                         <div className="post-flex-item post-img content" >
-                        { this.props.postCreatorId == this.props.currentUserId ? <div className="postObj" ><button onClick={this.updatePost}>Revise</button><button onClick={this.deletePost}>Remove</button></div>  : null }
+                        {this.props.postCreatorId === this.props.currentUserId ? <div className="postObj" ><button onClick={this.updatePost}>Revise</button><button onClick={this.deletePost}>Remove</button></div>  : null }
                             <LazyLoad 
                                 
                                 debounce={false}

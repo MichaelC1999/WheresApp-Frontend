@@ -7,7 +7,6 @@ class Backdrop extends React.Component {
     
     clickedHandler = () => {
         if(this.props.showDrawer){
-            console.log('chungus');
             this.props.showDrawer();
             return
         }

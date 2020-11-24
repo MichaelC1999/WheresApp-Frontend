@@ -1,16 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import './PostPage.css';
+import './ViewPostImg.css';
 
 //NOTE: WHEN ANY SINGLE POST FROM ANY USER IS VIEWED IN MODAL, POSTDATA GETS STORED TO REDUX< AND ADDING A POST TURNS INTO EDIT POST
 //NOTE: WHEN ANY PART OF POST DIV IS CLICKED (EVEN LINKS OR EDIT) IT TRIGGERS VIEW SINGLE POST MODAL
 
-class PostPage extends React.Component {
+class ViewPostImg extends React.Component {
     render() {
         return (
-            <div className="PostPage">
+            <div className="ViewPostImg">
                 
-                <img src={this.props.postData.imageUrl} />
+                <img alt="view" src={this.props.postData.imageUrl} />
                 
             </div>
         )
@@ -23,4 +23,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(PostPage);
+export default connect(mapStateToProps)(ViewPostImg);

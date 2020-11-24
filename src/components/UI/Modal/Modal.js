@@ -1,10 +1,9 @@
 import React from 'react';
 import Backdrop from '../Backdrop';
 import AddPost from '../../AddPost';
-import PostPage from '../../Post/PostPage';
+import ViewPostImg from '../../Post/ViewPostImg';
 import DeleteConfirm from '../../Post/Delete/DeleteConfirm';
 import {connect} from 'react-redux';
-import * as actionTypes from '../../../Store/actionTypes';
 
 import './Modal.css';
 
@@ -19,7 +18,7 @@ class Modal extends React.Component {
         } else if(this.props.modalType === "EDIT_POST"){
             modalCompToRender = <AddPost  />
         } else if(this.props.modalType === "SINGLE_POST"){
-            modalCompToRender = <PostPage />
+            modalCompToRender = <ViewPostImg />
         } else if(this.props.modalType === "DELETE_POST"){
             modalCompToRender = <DeleteConfirm />
         }

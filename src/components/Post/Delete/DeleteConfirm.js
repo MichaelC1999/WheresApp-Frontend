@@ -14,7 +14,6 @@ class DeleteConfirm extends React.Component {
 
     submitDelete = (e) => {
         e.preventDefault()
-        console.log(this.props.userId, e)
         fetch('https://wheresapp-backend.herokuapp.com/posts/' + this.props.postId, {
                 method: 'DELETE',
                 headers: {

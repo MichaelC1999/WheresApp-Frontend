@@ -6,7 +6,7 @@ import UserList from './components/UserList/UserList';
 import Authenticate from './components/Auth/Authenticate';
 import Modal from './components/UI/Modal/Modal';
 import UserPage from './components/UserList/UserPage/UserPage';
-import PostPage from './components/Post/PostPage';
+import ViewPostImg from './components/Post/ViewPostImg';
 import * as actionTypes from './Store/actionTypes';
 import {connect} from 'react-redux';
 
@@ -39,7 +39,6 @@ class App extends React.Component {
   }
 
   logoutHandler = () => {
-    console.log(localStorage.getItem('expiryDate'))
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
     localStorage.removeItem('expiryDate')
@@ -63,7 +62,7 @@ class App extends React.Component {
         <div style={{paddingTop: 52}}>
           <Switch>
             <Route path="/" exact component={MainFeed} />
-            <Route path="/posts/:postId" component={PostPage} />
+            <Route path="/posts/:postId" component={ViewPostImg} />
             <Route path="/users" exact component={UserList} />
             <Route path="/users/:userId" component={UserPage} />
             <Route path="/auth" exact component={Authenticate} />

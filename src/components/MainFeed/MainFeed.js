@@ -19,7 +19,6 @@ class MainFeed extends React.Component {
         const socket = openSocket('https://wheresapp-backend.herokuapp.com')
         socket.on('posts', data => {
             if(data.action === 'newPost'){
-                console.log(data.post)
                 this.addPost(data.post)
             }
         })
@@ -30,7 +29,6 @@ class MainFeed extends React.Component {
             method: "GET"
         }).then(response => {
             if(response.status!==200 && response.status!==201){
-                console.log(response)
                 if(response.status === 404){
                     throw new Error("No posts were found. You should add a post!")
                 } else {
@@ -39,7 +37,6 @@ class MainFeed extends React.Component {
             }
             return response.json()
         }).then(resData => {
-            console.log(resData)
             this.setState({posts: resData.posts, nextPage: resData.next})
         }).catch(err => {
             console.log(err.message)
@@ -83,9 +80,8 @@ class MainFeed extends React.Component {
         let posts
         
         if(this.state.posts){
-            posts = this.state.posts.map( post => {
-                console.log(post.comments)
-                return <Post imageUrl={post.imageUrl} comments={post.comments} date={post.createdAt.split("T")[0]} title={post.title} desc={post.desc} postCreatorId={post.creator._id} userName={post.creator.name} location={post.location} postId={post._id}/>
+            posts = this.state.posts.map((post, idx) => {
+                return <Post key={idx} imageUrl={post.imageUrl} comments={post.comments} date={post.createdAt.split("T")[0]} title={post.title} desc={post.desc} postCreatorId={post.creator._id} userName={post.creator.name} location={post.location} postId={post._id}/>
             })
         } else if(!this.state.error){
             posts = <Loader />

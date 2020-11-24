@@ -5,7 +5,7 @@ import './Loader.css';
 class Loader extends React.Component {
     render() {
         return (
-            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         )
     }
 }

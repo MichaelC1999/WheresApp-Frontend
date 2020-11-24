@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
-import * as actionTypes from '../../Store/actionTypes';
+import { NavLink } from 'react-router-dom';
 
 import MobileDrawer from './Mobile/MobileDrawer';
 import './Navigation.css';
@@ -10,7 +9,6 @@ class Navigation extends React.Component {
     
     state = {
         drawer: false
-
     }
 
     showDrawer = () => {
@@ -28,7 +26,7 @@ class Navigation extends React.Component {
                         <div className="container-fluid">
                         <div className="navbar-header mobile-nav">
                             <button onClick={this.showDrawer} className="menu-btn">Menu</button>
-                            <img className="logo-head" src="/wheresapp-red.png" height="30"/>
+                            <img className="logo-head" alt="logo" src="/wheresapp-red.png" height="30"/>
                             <a className="navbar-name" href="/">WheresApp</a>
                         </div>
                         <div className="nav-list">
@@ -38,7 +36,7 @@ class Navigation extends React.Component {
                                 <li><a className="nav-link" href="https://github.com/MichaelC1999/WheresApp-Frontend" >Project</a></li>
                             
                             
-                            {this.props.currentUserId ? <React.Fragment><li onClick={this.props.addPostHandler}><a className="nav-link">Add Post</a></li><li onClick={this.props.logoutHandler}><a className="nav-link">Logout</a></li></React.Fragment> : <React.Fragment><li><NavLink  className="nav-link" to="/auth" >Login</NavLink></li></React.Fragment>}
+                            {this.props.currentUserId ? <React.Fragment><li onClick={this.props.addPostHandler} className="nav-link">Add Post</li><li onClick={this.props.logoutHandler} className="nav-link">Logout</li></React.Fragment> : <React.Fragment><li><NavLink  className="nav-link" to="/auth" >Login</NavLink></li></React.Fragment>}
                             </ul>
                         </div>
                         </div>

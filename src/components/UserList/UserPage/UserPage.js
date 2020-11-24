@@ -36,7 +36,6 @@ class UserPage extends React.Component {
                 },
                 body: formData
             }).then(response => {
-                console.log(response)
                 if(response.status !==200 && response.status !== 201 ){
                     throw new Error("Editing user page failed")
                 }
@@ -51,7 +50,6 @@ class UserPage extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
         fetch("https://wheresapp-backend.herokuapp.com/users/" + this.props.match.params.userId, {
             method: "GET"
         }).then(response => {
@@ -64,7 +62,6 @@ class UserPage extends React.Component {
             }
             return response.json()
         }).then(resData => {
-            console.log(resData)
             this.setState({user: resData.user, posts: resData.posts})
         }).catch(err => {
             console.log(err.message);
@@ -76,16 +73,14 @@ class UserPage extends React.Component {
         //loop through posts, map them into Post components to render
         let loaded = null
         let bio;
-        console.log(this.props.match)
 
         
 
         if(this.state.user){
-            console.log(this.state.user.avatarImg)
             if(this.props.match.params.userId === this.props.currentUserId && this.props.token){
-                {this.state.user.bio ? bio = <p onClick={this.editUser}>{this.state.user.bio}</p> : bio =<p onClick={this.editUser}>Click here to edit your bio</p>}
+                this.state.user.bio ? bio = <p onClick={this.editUser}>{this.state.user.bio}</p> : bio =<p onClick={this.editUser}>Click here to edit your bio</p>
             } else {
-                {this.state.user.bio ? bio = <p>{this.state.user.bio}</p> : bio = <p>This user has no bio</p>}
+                this.state.user.bio ? bio = <p>{this.state.user.bio}</p> : bio = <p>This user has no bio</p>
             }
             if(this.state.editing){
                 bio = <form onSubmit={this.submitEdit.bind()} >
@@ -94,7 +89,6 @@ class UserPage extends React.Component {
                 </form>
             }
 
-            console.log(this.state.user)
             loaded = (
                 <div className="userPage container-fluid">
                     <div className="row justify-content-center">
@@ -106,7 +100,7 @@ class UserPage extends React.Component {
                             {bio}
                         </div>  
                         <div className="postFeed col-sm-7">
-                            {this.state.posts.length == 0 ? <h1 style={{textAlign: "center"}}>No posts have been made by this user</h1> : null}
+                            {this.state.posts.length === 0 ? <h1 style={{textAlign: "center"}}>No posts have been made by this user</h1> : null}
                             {this.state.posts.map(post => {
                                 
                                 return <Post imageUrl={post.imageUrl}  date={post.createdAt.split("T")[0]} comments={post.comments} title={post.title} desc={post.desc} postCreatorId={this.state.user._id} userName={this.state.user.name} location={post.location} postId={post._id}/>
@@ -119,7 +113,6 @@ class UserPage extends React.Component {
             
         }
         if(this.state.error){
-            console.log(this.state.error)
             loaded = <h2>{this.state.error}</h2>;
         }
         return ( <div>{loaded}</div> )

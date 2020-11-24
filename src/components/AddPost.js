@@ -14,7 +14,6 @@ class AddPost extends React.Component {
     }
 
     componentDidMount () {
-        console.log(this.props.token)
         //if this.props.postID {this.setState({title: this.props.title, location:this.props.location, imageUrl: this.props.imagUrl, desc:this.props.desc})}
         //you can fetch post and get values from there or send values in as props
         if(this.props.postData.postId){
@@ -30,7 +29,6 @@ class AddPost extends React.Component {
 
 
     changeHandler = (e) => {
-        console.log(e.target)
         if(e.target.name!=="image"){
             this.setState({[e.target.name] : e.target.value})
             
@@ -41,7 +39,6 @@ class AddPost extends React.Component {
     submitHandler = (e) => {
         e.preventDefault();
         if(this.state.title.length <= 5 || this.state.desc.length <=10 || this.state.location <= 3){
-            console.log(this.state)
             this.setState({error: "Invalid inputs"})
             return ;
         }
@@ -64,7 +61,6 @@ class AddPost extends React.Component {
             return
         }
         if(this.props.postData.postId){
-            console.log("REVISE POST")
             //if this.props.postID, put request to api/posts/:postID with state values attached as form data, to update old Post object with same ID
             //make put request, in controller figure out if formData 'image' is the same as legacy value. If same, return. If different, go through image upload method.
             //SEE NOTE BY POST REQ
@@ -76,7 +72,6 @@ class AddPost extends React.Component {
                 body: formData
             }).then(response => {
                 //doesnt get here until server returns res JSON
-                console.log(response)
 
                 if (response.status !== 200 && response.status !== 201) {
                     if(response.status === 403){
@@ -97,14 +92,12 @@ class AddPost extends React.Component {
                 this.showImageInput();
                 this.props.zeroPostData();
                 this.props.closeModal();
-                console.log(this.props);
                 window.location.reload();
             }).catch(err => {
                 console.log(err.message)
                 this.setState({error: err.message})
             })
         } else {
-            console.log("ADDING NEW POST")
             //if no postID, post request to api/posts with values attached as form data, to create new post object in Post model
             //NOTE: FEED PROJECT CREATEPOST REQ HAS DIFFERENT HEADERS WITH BEARER AUTHORIZATION, MAYBE SOURCE OF ISSUE???
             fetch('https://wheresapp-backend.herokuapp.com/posts', {
@@ -149,7 +142,6 @@ class AddPost extends React.Component {
             error = <h2>{this.state.error}</h2>
 
         }
-        console.log(this.state.desc.length)
         return (
             <div className="post-modal">
                 {this.props.postData.postId ? <h1>Edit Post</h1> : <h1>New Post</h1>}
