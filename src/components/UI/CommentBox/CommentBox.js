@@ -28,12 +28,24 @@ class CommentInput extends React.Component {
 
         const formData = new FormData();
 
+        let url;
+        let method;
 
         formData.append('comment', this.state.comment);
-        formData.append('userId', this.props.currentUserId)
 
-        const url = 'https://wheresapp-backend.herokuapp.com/posts/' + this.props.postId + '/newComment'
-        const method = "POST"
+        if(this.props.method == "edit") {
+            formData.append('commentId', this.props.commentId);
+
+            url = 'https://wheresapp-backend.herokuapp.com/posts/' + this.props.postId + '/editComment'
+            method = "PUT"
+
+        } else if(!this.props.method) {
+            formData.append('userId', this.props.currentUserId)
+
+            url = 'https://wheresapp-backend.herokuapp.com/posts/' + this.props.postId + '/newComment'
+            method = "POST"
+        }
+        
 
         fetch(url, {
                 method: method,
@@ -58,10 +70,11 @@ class CommentInput extends React.Component {
 
     render() {
         return (
-                <form className="commentBox noClick" onSubmit={this.submitComment.bind()}>
+                <form className="commentBox" onSubmit={this.submitComment.bind()}>
                     {this.state.error ? <label style={{color: "red"}} for="comment">{this.state.error}</label> : null}
-                    <textarea className="noClick" name="comment" value={this.state.comment} onChange={this.stateHandler.bind()} placeholder="Comment here"/>
-                    <button className="noClick" type="submit">Add comment</button>
+                    <textarea name="comment" value={this.state.comment} onChange={this.stateHandler.bind()} placeholder="Comment here"/>
+                    <button type="submit">Add comment</button>
+                    {this.props.method=="edit" ? <button onClick={this.props.cancelEdit}>Cancel</button> : null}
                 </form>
 
         )

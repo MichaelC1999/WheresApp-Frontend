@@ -2,6 +2,7 @@ import React from 'react';
 import Post from './MainFeedPosts/Post';
 import Loader from '../UI/Loader/Loader';
 import './MainFeed.css';
+import openSocket from 'socket.io-client';
 
 
 class MainFeed extends React.Component {
@@ -15,6 +16,13 @@ class MainFeed extends React.Component {
     componentDidMount() {
         //Make req to API to retrieve all posts from data base
         this.fetchPosts();
+        const socket = openSocket('https://wheresapp-backend.herokuapp.com')
+        socket.on('posts', data => {
+            if(data.action === 'newPost'){
+                console.log(data.post)
+                this.addPost(data.post)
+            }
+        })
     }
 
     fetchPosts = () => {
@@ -39,6 +47,20 @@ class MainFeed extends React.Component {
         })
     }
                                                                                                         
+    addPost = post => {
+
+        this.setState(prevState => {
+            const updatedPosts = [...prevState.posts];
+            if (prevState.posts.length === 20) {
+                updatedPosts.pop();
+            }
+            updatedPosts.unshift(post);
+            
+            return {
+              posts: updatedPosts,
+            };
+          });
+    }
 
     loadNext = async () => {
         await this.setState({posts: null, counter: this.state.counter+1})

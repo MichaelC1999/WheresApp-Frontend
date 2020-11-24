@@ -5,7 +5,9 @@
 
 }
 
-
+.commentBox > * {
+    text-align: center;
+}
 
 .commentBox > textarea {
     width: 100%;

@@ -29,11 +29,13 @@ class App extends React.Component {
     if (new Date(expiryDate) <= new Date()) {
       this.logoutHandler();
       return;
+    } else {
+      const userId = localStorage.getItem('userId');
+      if(userId){
+        this.props.userLogin(userId, token)
+      }
     }
-    const userId = localStorage.getItem('userId');
-    if(userId){
-      this.props.userLogin(userId, token)
-    } 
+     
   }
 
   logoutHandler = () => {

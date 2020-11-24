@@ -26,9 +26,7 @@ class Post extends React.Component {
 
     viewPost = (e) => {
         console.log(e.target.className)
-        if(e.target.className == "noClick" || e.target.className == "postObj"){
-            return ;
-        }
+        
         //HAVE TO EDIT VIEW POST/ACTION, ONLY NEEDS POST IMAGE
         this.props.viewPost(
             this.props.postId, 
@@ -46,33 +44,33 @@ class Post extends React.Component {
         console.log(this.props)
         if(this.props.comments.length>=1){
             comments = this.props.comments.map(comment => {
-                return <Comment creator={comment.creator} content={comment.content} />
+                return <Comment commentId={comment._id} postId={this.props.postId} creator={comment.creator} content={comment.content} />
             })
         }
         
         return (
-            <div className="MainFeedPost" onClick={this.viewPost}>
+            <div className="MainFeedPost">
 
                     <div className="post-flex-group" style={{textAlign: "left"}}>
 
                         <div className="post-flex-item post-img content" >
-                        { this.props.postCreatorId == this.props.currentUserId ? <div className="postObj" ><button className="noClick" onClick={this.updatePost}>Revise</button><button  className="noClick"  onClick={this.deletePost}>Remove</button></div>  : null }
+                        { this.props.postCreatorId == this.props.currentUserId ? <div className="postObj" ><button onClick={this.updatePost}>Revise</button><button onClick={this.deletePost}>Remove</button></div>  : null }
                             <LazyLoad 
                                 
                                 debounce={false}
                                 offsetVertical={300}>
-                                <img className="fit-img img-fluid" src={this.props.imageUrl} alt="Post img"/>
+                                <img onClick={this.viewPost} className="fit-img img-fluid" src={this.props.imageUrl} alt="Post img"/>
                             </LazyLoad>
                         </div>
                         <div className="post-flex-item post-info">
-                            <h1>{this.props.title} - {this.props.location}</h1>
+                            <h1 onClick={this.viewPost}>{this.props.title} - {this.props.location}</h1>
                             
-                            <h3 className="noClick"><b><NavLink  className="noClick"  to={"/users/" + this.props.postCreatorId}>{this.props.userName}</NavLink></b></h3>
+                            <h3><b><NavLink to={"/users/" + this.props.postCreatorId}>{this.props.userName}</NavLink></b></h3>
 
                             <h5>Posted at {this.props.date}</h5>
-                            <p>{this.props.desc}</p>
+                            <p onClick={this.viewPost}>{this.props.desc}</p>
                             {comments ? <div className="commentList">{comments}</div> : null}
-                            {this.props.currentUserId ? <CommentBox className={"noClick"} postId={this.props.postId} /> : null}
+                            {this.props.currentUserId ? <CommentBox postId={this.props.postId} /> : null}
                         </div>
                     </div>
             </div>
