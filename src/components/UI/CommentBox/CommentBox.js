@@ -72,7 +72,7 @@ class CommentInput extends React.Component {
                 <form className="commentBox" onSubmit={this.submitComment.bind()}>
                     {this.state.error ? <label style={{color: "red"}} for="comment">{this.state.error}</label> : null}
                     <textarea name="comment" value={this.state.comment} onChange={this.stateHandler.bind()} placeholder="Comment here"/>
-                    <button type="submit">Add comment</button>
+                    <button type="submit">Add</button>
                     {this.props.method==="edit" ? <button onClick={this.props.cancelEdit}>Cancel</button> : null}
                 </form>
 

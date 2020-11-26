@@ -36,7 +36,7 @@ class Navigation extends React.Component {
                                 <li><a className="nav-link" href="https://github.com/MichaelC1999/WheresApp-Frontend" >Project</a></li>
                             
                             
-                            {this.props.currentUserId ? <React.Fragment><li onClick={this.props.addPostHandler} className="nav-link">Add Post</li><li onClick={this.props.logoutHandler} className="nav-link">Logout</li></React.Fragment> : <React.Fragment><li><NavLink  className="nav-link" to="/auth" >Login</NavLink></li></React.Fragment>}
+                            {this.props.currentUserId ? <React.Fragment><li onClick={this.props.addPostHandler} ><a className="nav-link">Add Post</a></li><li onClick={this.props.logoutHandler} ><a className="nav-link">Logout</a></li></React.Fragment> : <React.Fragment><li><NavLink  className="nav-link" to="/auth" >Login</NavLink></li></React.Fragment>}
                             </ul>
                         </div>
                         </div>
