@@ -1,4 +1,4 @@
-https://wheresapp-frontend.herokuapp.com/
+https://wheresapp-application.herokuapp.com/
 
 This is the frontend of 'WheresApp', my social media site. This was built in React and is made up of numerous class components. The client was styled in CSS but Bootstrap was used on some components for easier styling.
 

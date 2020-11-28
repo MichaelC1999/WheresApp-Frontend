@@ -30,7 +30,8 @@ const reducer = (state = initialState, action)=> {
             return {
                 ...state,
                 modalType: actionTypes.DELETE_POST,
-                postData: {postId: action.postId}
+                postData: {postId: action.postId},
+                commentIdx: action.commentIdx
             }
         case actionTypes.CLOSE_MODAL:
             return {

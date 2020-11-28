@@ -94,7 +94,7 @@ class MainFeed extends React.Component {
                     {posts}
                     <div className="pageNav">
                         {this.state.counter >= 1 && this.state.posts ? <p className="pageSelect" onClick={this.loadLast}>{this.state.counter}</p> : null}
-                        {this.state.posts ? <p style={{backgroundColor: "red", color: "white"}} className="pageSelect">{this.state.counter+1}</p> : null}
+                        {this.state.counter >= 1 || this.state.nextPage ? <p style={{backgroundColor: "red", color: "white"}} className="pageSelect">{this.state.counter+1}</p> : null}
                         {this.state.nextPage && this.state.posts ? <p className="pageSelect" onClick={this.loadNext}>{this.state.counter+2}</p> : null}
                     </div>
                 </div>

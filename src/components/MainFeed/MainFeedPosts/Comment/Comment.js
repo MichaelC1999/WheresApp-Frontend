@@ -3,6 +3,7 @@ import './Comment.css';
 import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 import CommentBox from '../../../UI/CommentBox/CommentBox';
+import * as actionTypes from '../../../../Store/actionTypes';
 
 
 class Comment extends React.Component {
@@ -20,8 +21,9 @@ class Comment extends React.Component {
         this.setState({editing: false})
     }
 
-    deleteComment = () => {
-
+    deleteComment = () => { 
+        this.props.deleteComment(this.props.postId, this.props.commentIdx)
+        
     }
 
     checkUser = () => {
@@ -33,13 +35,10 @@ class Comment extends React.Component {
 
     render () {
 
-        //ONCE EDIT COMMENT FEATURE IS ENABLED, PUT THIS INTO THE FRAGMENT IN COMMENT VAR BELOW
-        //{this.props.currentUserId === this.props.creator._id ? <div className="commentBtn"><button onClick={this.editComment}>Revise</button><button>Remove</button></div> : null}
-
-        let comment = <React.Fragment><p><b><NavLink to={"/users/" + this.props.creator._id}>{this.props.creator.name}</NavLink></b> {this.props.content}</p></React.Fragment>;
+        let comment = <React.Fragment><p><b><NavLink to={"/users/" + this.props.creator._id}>{this.props.creator.name}</NavLink></b> {this.props.content}</p>{this.props.currentUserId === this.props.creator._id ? <div className="commentBtn"><button onClick={this.editComment}>Revise</button><button onClick={this.deleteComment}>Remove</button></div> : null}</React.Fragment>;
 
         if(this.state.editing){
-            comment = <CommentBox postId={this.props.postId} cancelEdit={this.cancelEdit} commentId={this.props.commentId} comment={this.props.content} method="edit" />
+            comment = <CommentBox postId={this.props.postId} cancelEdit={this.cancelEdit} commentIdx={this.props.commentIdx} comment={this.props.content} method="edit" />
         }
 
         return (
@@ -53,8 +52,16 @@ class Comment extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        currentUserId: state.currentUserId
+        currentUserId: state.currentUserId,
+        token: state.token
+
     }
 }
 
-export default connect(mapStateToProps)(Comment);
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteComment: (postId, idx) => dispatch({type: actionTypes.DELETE_POST, postId: postId, commentIdx: idx })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Comment);

@@ -145,7 +145,7 @@ class Authenticate extends React.Component {
             this.setState({error: "No profile picture selected"});
             return ;
         }
-        await this.setState({error: null, email: this.state.email.toLowerCase(), message: "Loading..."}, () => console.log(this.state.email))
+        await this.setState({error: null, email: this.state.email.toLowerCase(), message: "Loading..."})
 
         if(this.state.authType === "Login") {
             this.submitLogin(e);

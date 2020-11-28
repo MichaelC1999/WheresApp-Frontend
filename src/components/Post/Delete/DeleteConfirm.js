@@ -8,12 +8,48 @@ class DeleteConfirm extends React.Component {
         error: null
     }
 
+    componentDidMount() {
+        if(this.props.commentIdx || this.props.commentIdx===0){
+            this.setState({deleteType: "comment"})
+        } else {
+            this.setState({deleteType: "post"})
+        }
+    }
+
     cancelDelete = () => {
         this.props.closeModal()
     }
 
     submitDelete = (e) => {
         e.preventDefault()
+        if(this.state.deleteType==="post"){
+            this.submitDeletePost()
+        } else if(this.state.deleteType==="comment"){
+            this.submitDeleteComment()
+        }
+    }
+
+    submitDeleteComment = () => {
+        fetch('https://wheresapp-backend.herokuapp.com/posts/' + this.props.postId + '/' + this.props.commentIdx + '/deleteComment', {
+            method: "DELETE",
+            headers: {
+                authorization: 'Bearer ' + this.props.token
+            }
+        }).then(response => {
+            if(response.status!==200 && response.status!==201){
+                throw new Error('Editing a post failed!');
+            }
+            return response.json();
+
+        }).then(resData => {
+            
+            window.location.reload() 
+        }).catch(err => {
+            this.setState({error: err.message})
+        })
+    }
+
+    submitDeletePost = () => {
         fetch('https://wheresapp-backend.herokuapp.com/posts/' + this.props.postId, {
                 method: 'DELETE',
                 headers: {
@@ -44,11 +80,12 @@ class DeleteConfirm extends React.Component {
 
     render() {
         return (
-            <div>
-                <h5>{this.state.error ? this.state.error: "Are you sure you would like to delete this post?"}</h5>
+            <div style={{textAlign: "center"}}>
+
+                <h5 style={{fontSize: "40px"}}>{this.state.error ? this.state.error: "Are you sure you want to delete this " + this.state.deleteType + "?"}</h5>
                 <div>
-                    <button onClick={this.cancelDelete}>No</button>
-                    <button onClick={this.submitDelete}>Yes</button>
+                    <button style={{alignItems: "center", fontSize: "25px", height: "50px"}} onClick={this.cancelDelete}>No</button>
+                    <button style={{fontSize: "25px", height: "50px"}} onClick={this.submitDelete}>Yes</button>
                 </div>
             </div>
         )
@@ -59,7 +96,8 @@ const mapStateToProps = state => {
     return {
         postId: state.postData.postId,
         userId: state.currentUserId,
-        token: state.token
+        token: state.token,
+        commentIdx: state.commentIdx
     }
 }
 

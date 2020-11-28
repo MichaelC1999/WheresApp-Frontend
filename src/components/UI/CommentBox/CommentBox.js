@@ -31,17 +31,13 @@ class CommentInput extends React.Component {
         let url;
         let method;
 
-        formData.append('comment', this.state.comment);
-
         if(this.props.method === "edit") {
-            formData.append('commentId', this.props.commentId);
-
-            url = 'https://wheresapp-backend.herokuapp.com/posts/' + this.props.postId + '/editComment'
+            formData.append('comment', this.state.comment);
+            url = 'https://wheresapp-backend.herokuapp.com/posts/' + this.props.postId + '/' + this.props.commentIdx + '/editComment'
             method = "PUT"
-
         } else if(!this.props.method) {
             formData.append('userId', this.props.currentUserId)
-
+            formData.append('comment', this.state.comment);
             url = 'https://wheresapp-backend.herokuapp.com/posts/' + this.props.postId + '/newComment'
             method = "POST"
         }
