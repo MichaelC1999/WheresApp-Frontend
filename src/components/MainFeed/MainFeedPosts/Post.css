@@ -4,9 +4,9 @@
 }
 
 .commentList {
-    background-color: red;
+    background-color: rgb(201, 41, 41);
     padding: 15px 0;
-    border: 1px black solid;
+    border: 2px black solid;
     margin-bottom: 15px;
 }
 
