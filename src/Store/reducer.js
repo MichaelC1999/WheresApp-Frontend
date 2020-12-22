@@ -2,9 +2,14 @@ import * as actionTypes from './actionTypes';
 
 const initialState = {
     modalType: null,
-    postData: {},
+    imageUrl: "",
     currentUserId: null,
-    token: null
+    token: null,
+    messages: {
+        sent: [],
+        rec: [],
+        unread: false
+    },
 }
 
 const reducer = (state = initialState, action)=> {
@@ -14,11 +19,19 @@ const reducer = (state = initialState, action)=> {
                 ...state,
                 modalType: actionTypes.ADD_POST
             }
-        case actionTypes.SINGLE_POST:
+        
+        case actionTypes.SEND_PM:
+            
             return {
                 ...state,
-                modalType: actionTypes.SINGLE_POST,
-                postData: action.postData
+                recipient: action.recipient,
+                modalType: actionTypes.SEND_PM
+            }
+        case actionTypes.VIEW_IMG:
+            return {
+                ...state,
+                modalType: actionTypes.VIEW_IMG,
+                imageUrl: action.imageUrl
             }
         case actionTypes.EDIT_POST:
             return {
@@ -37,19 +50,68 @@ const reducer = (state = initialState, action)=> {
             return {
                 ...state,
                 postData: {},
+                recipient: null,
                 modalType: null
             }
         case actionTypes.USER_LOGIN:
+            
             return {
                 ...state,
                 token: action.token,
-                currentUserId: action.userId
+                currentUserId: action.userId,
+                currentUserName: action.userName,
+                
             }
+        case actionTypes.OPEN_MAIL:
+            return {
+                ...state,
+                modalType: actionTypes.OPEN_MAIL,
+                messages: {
+                    ...state.messages,
+                    unread: false
+                }
+                
+            }
+        case actionTypes.SET_MSG:
+            let sentMsg = []
+            let recMsg = []
+            let msgs = action.msg
+            let unread = false
+            if(msgs){
+                msgs.reverse().map(msg => {
+                    if(msg.sender.id === state.currentUserId){
+                        sentMsg.push(msg)
+                    } else if(msg.recipient.id === state.currentUserId){
+                        recMsg.push(msg)
+                        if(msg.unread){
+                            unread = true
+                        }
+                    }
+                })
+            }
+            return {
+                ...state,
+                messages: {
+                    sent: sentMsg,
+                    rec: recMsg,
+                    unread: unread
+                },
+                loaded: true
+            }
+        
         case actionTypes.LOGOUT_REDUX:
             return {
                 ...state,
                 token: null,
-                currentUserId: null
+                messages: {
+                    sent: [],
+                    rec: [],
+                    unread: false
+                },
+                currentUserId: null,
+                currentUserName: null,
+                modalType: null,
+                loaded: false
             }
         case actionTypes.ZERO_POSTDATA:
             return {

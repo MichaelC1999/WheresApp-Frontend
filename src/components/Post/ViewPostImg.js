@@ -10,7 +10,7 @@ class ViewPostImg extends React.Component {
         return (
             <div className="ViewPostImg">
                 
-                <img alt="view" src={this.props.postData.imageUrl} />
+                <img alt="view" src={this.props.imageUrl} />
                 
             </div>
         )
@@ -19,7 +19,7 @@ class ViewPostImg extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        postData: state.postData
+        imageUrl: state.imageUrl
     }
 }
 

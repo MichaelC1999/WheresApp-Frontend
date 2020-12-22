@@ -76,6 +76,7 @@ li > .active {
 
 .navbar {
     background-color: rgb(201, 41, 41);
+    cursor: pointer;
 }
 
 header {

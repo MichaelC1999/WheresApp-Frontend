@@ -5,9 +5,9 @@
 
 .commentList {
     background-color: rgb(201, 41, 41);
-    padding: 15px 0;
+    padding: 10px 0;
     border: 2px black solid;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .MainFeedPost {
@@ -79,6 +79,6 @@
         flex-direction: column;
     }
     .commentList {
-        padding: 15px;
+        padding: 5px;
     }
 }

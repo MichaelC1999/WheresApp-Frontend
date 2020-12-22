@@ -1,26 +1,13 @@
 .ViewPostImg > img {
-    width: 85%;
+    max-width: 100%;
+    max-height: 100%;
     overflow: auto;
 }
 
 .ViewPostImg {
     width: 100%;
+        
     align-items: center;
     text-align: center;
 }
 
-
-
-@media (min-width: 600px) and (max-width: 1100px) {
-    .ViewPostImg > img {
-        height: 40%;
-    }
-}
-
-@media (min-width: 1100px) {
-    .ViewPostImg > img {
-        height: 60%;
-        width: 75%;
-        
-    }
-}

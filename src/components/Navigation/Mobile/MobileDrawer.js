@@ -17,7 +17,7 @@ class MobileDrawer extends React.Component {
                     <ul>
                         <li><NavLink to="/">Main Feed</NavLink></li>
                         <li><NavLink to="/users" >Users List</NavLink></li>
-                        {this.props.authStatus ? <React.Fragment><li onClick={this.props.addPostHandler}>Add Post</li><li onClick={this.props.logoutHandler}>Logout</li></React.Fragment> : <li><NavLink to="/auth" >Login</NavLink></li>}
+                        {this.props.authStatus ? <React.Fragment><li onClick={this.props.checkInbox}>Inbox</li><li onClick={this.props.addPost}>Add Post</li><li onClick={this.props.logoutHandler}>Logout</li></React.Fragment> : <li><NavLink to="/auth" >Login</NavLink></li>}
                     </ul>
                 </div>
                 <Backdrop showDrawer={this.props.showDrawer}/>

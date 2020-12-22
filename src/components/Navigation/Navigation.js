@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { NavLink } from 'react-router-dom';
-
+import * as actionTypes from '../../Store/actionTypes'
 import MobileDrawer from './Mobile/MobileDrawer';
 import './Navigation.css';
 
@@ -15,11 +15,15 @@ class Navigation extends React.Component {
         this.setState({drawer: !this.state.drawer})
     }
 
+    
+
     render() {
+
+        
 
         return (
             <React.Fragment>
-                <MobileDrawer authStatus={this.props.currentUserId} addPostHandler={this.props.addPostHandler} logoutHandler={this.props.logoutHandler} showDrawer={this.showDrawer} drawerState={this.state.drawer}/>
+                <MobileDrawer authStatus={this.props.currentUserId} addPost={this.props.addPost} checkInbox={this.props.openMail} logoutHandler={this.props.logoutHandler} showDrawer={this.showDrawer} drawerState={this.state.drawer}/>
                 <header>
                     
                     <nav className="navbar">
@@ -35,8 +39,7 @@ class Navigation extends React.Component {
                                 <li><NavLink className="nav-link" to="/users" >Users List</NavLink></li>
                                 <li><a className="nav-link" href="https://github.com/MichaelC1999/WheresApp-Frontend" >Project</a></li>
                             
-                            
-                            {this.props.currentUserId ? <React.Fragment><li onClick={this.props.addPostHandler} ><a className="nav-link">Add Post</a></li><li onClick={this.props.logoutHandler} ><a className="nav-link">Logout</a></li></React.Fragment> : <React.Fragment><li><NavLink  className="nav-link" to="/auth" >Login</NavLink></li></React.Fragment>}
+                            {this.props.currentUserId ? <React.Fragment><li onClick={this.props.openMail}><a style={!this.props.messages.unread ? null : {backgroundColor: "lime", border: "2px black solid", padding: "7px 5px", borderRadius: "9%"}} className="nav-link" >Inbox</a></li><li onClick={this.props.addPost} ><a className="nav-link">Add Post</a></li><li onClick={this.props.logoutHandler} ><a className="nav-link">Logout</a></li></React.Fragment> : <React.Fragment><li><NavLink  className="nav-link" to="/auth" >Login</NavLink></li></React.Fragment>}
                             </ul>
                         </div>
                         </div>
@@ -49,12 +52,15 @@ class Navigation extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        currentUserId: state.currentUserId
+        currentUserId: state.currentUserId,
+        messages: state.messages
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        addPost: () => dispatch({type: actionTypes.ADD_POST}),
+        openMail: () => dispatch({type: actionTypes.OPEN_MAIL})
     }
 }
 

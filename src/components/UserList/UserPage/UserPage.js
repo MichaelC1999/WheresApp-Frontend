@@ -1,5 +1,7 @@
 import React from 'react';
 import Post from '../../MainFeed/MainFeedPosts/Post';
+import * as actionTypes from '../../../Store/actionTypes'
+
 
 import './UserPage.css'
 import {connect} from 'react-redux'
@@ -98,6 +100,7 @@ class UserPage extends React.Component {
                             
                             <h1>{this.state.user.name}</h1>
                             {bio}
+                            <button onClick={() => this.props.sendPM(this.state.user)}>Send Message</button>
                         </div>  
                         <div className="postFeed col-sm-7">
                             {this.state.posts.length === 0 ? <h1 style={{textAlign: "center"}}>No posts have been made by this user</h1> : null}
@@ -126,4 +129,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(UserPage);
+const mapDispatchToProps = dispatch => {
+    return {
+        sendPM: (user) => dispatch({type: actionTypes.SEND_PM, recipient: user})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserPage);

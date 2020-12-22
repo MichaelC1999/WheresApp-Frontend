@@ -41,8 +41,12 @@
         margin-left: 0;
         max-height: 100px;
     }
+
+    .comment > p {
+        width: 78%;
+    }
     .comment > .commentBtn {
-        width: 10%;
+        width: 12%;
     }
     
 }

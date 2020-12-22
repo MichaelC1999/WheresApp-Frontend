@@ -24,16 +24,9 @@ class Post extends React.Component {
         this.props.deletePost(this.props.postId);
     }
 
-    viewPost = (e) => {
-        
-        //HAVE TO EDIT VIEW POST/ACTION, ONLY NEEDS POST IMAGE
-        this.props.viewPost(
-            this.props.postId, 
-            this.props.title, 
-            this.props.location, 
-            this.props.desc, 
-            this.props.imageUrl
-        );
+    viewImg = () => {
+                
+        this.props.viewImg(this.props.imageUrl);
     }
     
     render() {
@@ -56,16 +49,16 @@ class Post extends React.Component {
                                 
                                 debounce={false}
                                 offsetVertical={300}>
-                                <img onClick={this.viewPost} className="fit-img img-fluid" src={this.props.imageUrl} alt="Post img"/>
+                                <img onClick={this.viewImg} style={{cursor: "pointer"}} className="fit-img img-fluid" src={this.props.imageUrl} alt="Post img"/>
                             </LazyLoad>
                         </div>
                         <div className="post-flex-item post-info">
-                            <h1 onClick={this.viewPost}>{this.props.title} - {this.props.location}</h1>
+                            <h1 onClick={this.viewImg}>{this.props.title} - {this.props.location}</h1>
                             
                             <h3><b><NavLink to={"/users/" + this.props.postCreatorId}>{this.props.userName}</NavLink></b></h3>
 
                             <h5>Posted at {this.props.date}</h5>
-                            <p onClick={this.viewPost}>{this.props.desc}</p>
+                            <p onClick={this.viewImg}>{this.props.desc}</p>
                             {comments ? <div className="commentList">{comments}</div> : null}
                             {this.props.currentUserId ? <CommentBox postId={this.props.postId} /> : null}
                         </div>
@@ -84,7 +77,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         editPost: (postId, title, location, desc, imageUrl) => dispatch({type: actionTypes.EDIT_POST, postData: {postId: postId, title: title, location: location, desc: desc, imageUrl: imageUrl}}),
-        viewPost: (postId, title, location, desc, imageUrl) => dispatch({type: actionTypes.SINGLE_POST, postData: {postId: postId, title: title, location: location, desc: desc, imageUrl: imageUrl}}),
+        viewImg: (imageUrl) => dispatch({type: actionTypes.VIEW_IMG, imageUrl: imageUrl}),
         deletePost: (postId) => dispatch({type: actionTypes.DELETE_POST, postId: postId})
     }
 }

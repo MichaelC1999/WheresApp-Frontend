@@ -8,12 +8,16 @@ import Modal from './components/UI/Modal/Modal';
 import UserPage from './components/UserList/UserPage/UserPage';
 import ViewPostImg from './components/Post/ViewPostImg';
 import * as actionTypes from './Store/actionTypes';
+import openSocket from 'socket.io-client';
+
 import {connect} from 'react-redux';
 
 class App extends React.Component {
   
   state = {
-    modal: null
+    modal: null,
+    PM: [],
+    msgSocket: false
   }
 
   //if modalType redux state is false, render nothing
@@ -33,9 +37,20 @@ class App extends React.Component {
       const userId = localStorage.getItem('userId');
       if(userId){
         this.props.userLogin(userId, token)
+        fetch("https://wheresapp-backend.herokuapp.com/message", {
+          headers: {
+            authorization: 'Bearer ' + token
+          }
+        })
+        .then(res => {
+          return res.json()
+        })
+        .then(res => {
+          this.props.setMsg(res.PM)
+        })
       }
     }
-     
+    
   }
 
   logoutHandler = () => {
@@ -45,8 +60,15 @@ class App extends React.Component {
     this.props.logoutRedux();
   }
 
-  addPostHandler = () => {
-    this.props.addPost();
+  componentDidUpdate() {
+    if(this.state.msgSocket === false && localStorage.getItem('userId') === this.props.currentUserId){
+      const socket = openSocket('https://wheresapp-backend.herokuapp.com')
+      socket.on('Message@' + this.props.currentUserId, data => {
+        if(data.action === 'newPM'){
+          this.props.setMsg(data.msg)
+        }
+      })
+    }
   }
 
   render() {
@@ -57,7 +79,7 @@ class App extends React.Component {
     }
     return (
       <div>
-        <Navigation logoutHandler={this.logoutHandler} addPostHandler={this.addPostHandler} />
+        <Navigation logoutHandler={this.logoutHandler} />
         {renderModal}
         <div style={{paddingTop: 52}}>
           <Switch>
@@ -86,8 +108,7 @@ const mapDispatchToProps = dispatch => {
   return {
     userLogin: (userId, token) => dispatch({type: actionTypes.USER_LOGIN, userId: userId, token: token}),
     logoutRedux: () => dispatch({type: actionTypes.LOGOUT_REDUX}),
-    addPost: () => dispatch({type: actionTypes.ADD_POST})
-
+    setMsg: (msg) => dispatch({type: actionTypes.SET_MSG, msg: msg})
   }
 }
 

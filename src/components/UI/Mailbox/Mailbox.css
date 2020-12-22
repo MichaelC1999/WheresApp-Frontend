@@ -1,0 +1,40 @@
+.message {
+    border: rgb(201, 41, 41) 2px solid;
+    cursor: pointer;
+    padding: 5px;
+    margin: 5px;
+    width: 100%;
+}
+
+.msgText {
+    background-color: rgb(201, 41, 41, .37);
+    color: rgb(201, 41, 41);
+    padding: 10px;
+    cursor: text;
+}
+
+.boxLabel {
+    height: 50px;
+    width: 100%;
+}
+.boxLabel > h3 {
+    text-align: center;
+    margin: 7px 0px 0px 0px;
+    font-size: 35px;
+}
+
+.mailBtn {
+    top: 0px;
+    border: 1px black solid;
+    background-color: rgb(201, 41, 41);
+    color: white;
+    border-radius: 3px;
+}
+
+.msgText:hover {
+    background-color: rgb(203, 224, 224);
+    color: black;
+    padding: 8px;
+    border: black 2px solid;
+}
+

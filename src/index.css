@@ -21,20 +21,17 @@ img {
 
 a {
   color: rgb(201, 41, 41);
-
 }
 
 a:hover{
-  color: rgb(201, 41, 41);
-  background-color: white;
+  color: rgb(23, 18, 94);
 }
 
-a:active {
+/* a:active {
   background-color: rgb(201, 41, 41);
-  color: white;
   border: rgba(159, 173, 159, 0.938) 1px solid;
   border-radius: 3px;
-}
+} */
 
 .clearfix:after {
   content: ".";

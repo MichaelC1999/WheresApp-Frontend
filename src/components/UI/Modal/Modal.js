@@ -1,8 +1,10 @@
 import React from 'react';
 import Backdrop from '../Backdrop';
 import AddPost from '../../AddPost';
+import Mailbox from '../Mailbox/Mailbox';
 import ViewPostImg from '../../Post/ViewPostImg';
 import DeleteConfirm from '../../Post/Delete/DeleteConfirm';
+import SendPM from '../Mailbox/SendPM'
 import {connect} from 'react-redux';
 
 import './Modal.css';
@@ -17,10 +19,14 @@ class Modal extends React.Component {
             modalCompToRender = <AddPost />
         } else if(this.props.modalType === "EDIT_POST"){
             modalCompToRender = <AddPost  />
-        } else if(this.props.modalType === "SINGLE_POST"){
+        } else if(this.props.modalType === "VIEW_IMG"){
             modalCompToRender = <ViewPostImg />
         } else if(this.props.modalType === "DELETE_POST"){
             modalCompToRender = <DeleteConfirm />
+        } else if(this.props.modalType === "OPEN_MAIL"){
+            modalCompToRender = <Mailbox />
+        } else if(this.props.modalType === "SEND_PM"){
+            modalCompToRender = <SendPM newMessage={this.props.recipient}/>
         }
 
 
@@ -44,7 +50,8 @@ class Modal extends React.Component {
 const mapStateToProps = state => {
     return {
         modalType: state.modalType,
-        postId: state.postId
+        postId: state.postId,
+        recipient: state.recipient
     }
 }
 

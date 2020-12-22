@@ -72,28 +72,29 @@ class Authenticate extends React.Component {
             }
             return response.json();            
         }).then(resData => {
-            this.loginSuccess(resData.userId, resData.token)
+            this.loginSuccess(resData.userId, resData.userName, resData.PM, resData.token)
         }).catch(err => {
             this.setState({error: err.message})
         })            
     }
 
-    loginSuccess = async (userId, token) => {
+    loginSuccess = async (userId, userName, messages, token) => {
         //once backend has returned a successful login, change redux state of userId to the successful login userId, or the userId of user created at signup
         //also after session/cookies created in backend, relay to here to update state for session for ogged in users
         try {
             localStorage.setItem('userId', userId);
             localStorage.setItem('token', token)
-            this.props.userLogin(userId, token)
+            this.props.userLogin(userId, userName, token)
+            this.props.setMsg(messages)
             const remainingMilliseconds = 60 * 60 * 1000;
             const expiryDate = new Date(
               new Date().getTime() + remainingMilliseconds
             );
             localStorage.setItem('expiryDate', expiryDate.toISOString());
-            //this.setAutoLogout(remainingMilliseconds);
+            
             this.props.history.push('/')
         } catch {
-            console.log('assigning user Id to redux error')
+            console.log('assigning user Id to redux error', userId, userName, messages, token)
         }
         
     }
@@ -132,7 +133,7 @@ class Authenticate extends React.Component {
                 return response.json();
                 
           }).then(resData => {
-                this.loginSuccess(resData.userId, resData.token);
+                this.loginSuccess(resData.userId, resData.userName, null, resData.token);
           }).catch(err => {
                 this.setState({error: err.message})
         })
@@ -192,7 +193,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        userLogin: (userId, token) => dispatch({type: actionTypes.USER_LOGIN, userId: userId, token: token})
+        userLogin: (userId, userName, token) => dispatch({type: actionTypes.USER_LOGIN, userId: userId, userName: userName, token: token}),
+        setMsg: (msg) => dispatch({type: actionTypes.SET_MSG, msg: msg})
     }
 }
 
