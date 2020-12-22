@@ -18,7 +18,7 @@ class Message extends React.Component {
         this.state.showMsg === false ? this.setState({showMsg: true}) : this.setState({showMsg: false})
         if(this.props.mes.unread === true && this.state.showMsg === false && !this.state.touched && this.props.mes.recipient.id === this.props.currentUserId){
             this.setState({touched: true})
-            fetch("https://wheresapp-backend.herokuapp.comkend.herokuapp.com/message/" + this.props.mes._id, {
+            fetch("https://wheresapp-backend.herokuapp.com/message/" + this.props.mes._id, {
                 headers: {
                     authorization: 'Bearer ' + this.props.token
                 }

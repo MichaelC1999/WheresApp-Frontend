@@ -23,8 +23,8 @@ class Inbox extends React.Component {
         let display;
 
         if(this.props.messages.length > 0){
-            display = this.props.messages.map(mes => {
-                return <Message reply={this.props.reply} box={this.props.box} mes={mes} />
+            display = this.props.messages.map((mes, idx) => {
+                return <Message reply={this.props.reply} key={idx} box={this.props.box} mes={mes} />
             })
         } else {
             display = <h3>No messages in {this.props.box}</h3>

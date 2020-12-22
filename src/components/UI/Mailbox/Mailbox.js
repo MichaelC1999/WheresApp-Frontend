@@ -63,7 +63,7 @@ class Mailbox extends React.Component {
 
 
         return (
-            <div>
+            <div className="listed">
 
                 {mailer}
 

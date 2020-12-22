@@ -56,7 +56,7 @@ class SendPM extends React.Component{
         formData.append("time", now.toLocaleTimeString('en-US', { timeZone: 'America/New_York' }))
         formData.append("date", now.toLocaleDateString('en-US', { timeZone: 'America/New_York' }))
         
-        fetch("https://wheresapp-backend.herokuapp.comkend.herokuapp.com/message", {
+        fetch("https://wheresapp-backend.herokuapp.com/message", {
             method: "POST",
             headers: {
                 authorization: 'Bearer ' + this.props.token
@@ -78,7 +78,7 @@ class SendPM extends React.Component{
                     <h3>Message to {this.state.recipient.name}</h3>
 
                 </div>
-                <form style={{marginTop: "10px"}} className="input" onSubmit={this.submitMessage}>
+                <form style={{marginTop: "5px"}} className="input" onSubmit={this.submitMessage}>
                     <input name="title" onChange={this.changeInputHandler} value={this.state.title} placeholder="Title..." />
                     <textarea style={{height: "200px"}} name="content" onChange={this.changeInputHandler} value={this.state.content} placeholder="Message..." />
                     <button style={{margin: "8px 4px"}} type="submit">Send Message</button>
