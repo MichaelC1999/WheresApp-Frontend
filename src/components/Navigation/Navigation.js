@@ -35,7 +35,7 @@ class Navigation extends React.Component {
                         </div>
                         <div className="nav-list">
                             <ul className="navbar-name">
-                                <li><NavLink className="nav-link" onClick={() => window.location.reload()} to="/">Main Feed</NavLink></li>
+                                <li><NavLink className="nav-link" to="/">Main Feed</NavLink></li>
                                 <li><NavLink className="nav-link" to="/users" >Users List</NavLink></li>
                                 <li><a className="nav-link" href="https://github.com/MichaelC1999/WheresApp-Frontend" >Project</a></li>
                             
