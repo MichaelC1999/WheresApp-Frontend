@@ -15,7 +15,7 @@
 }
 
 .comment > img {
-    width: 60%;
+    width: 40%;
     margin-left: 10px;
 }
 .comment > .commentBtn {
@@ -26,7 +26,7 @@
 }
 .comment > p {
     width: 80%;
-    padding: 0 10px;
+    padding: 0 5px;
 }
 
 @media (min-width: 900px) {
@@ -37,7 +37,7 @@
     }
     .comment > img {
         object-fit: cover;
-        width: 10%;
+        max-width: 10%;
         margin-left: 0;
         max-height: 100px;
     }
