@@ -1,6 +1,8 @@
 import React from 'react';
 import LazyLoad from 'react-lazy-load';
 import './UserBlock.css';
+import * as actionTypes from '../../../Store/actionTypes'
+import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom';
 
 class UserBlock extends React.Component {
@@ -20,10 +22,25 @@ class UserBlock extends React.Component {
                         <h3>{this.props.name}</h3>
                         <h5>{this.props.postTotal} posts total</h5>
                         <p>{this.props.bio}</p>
+                        {this.props.currentUserId && this.props.token ? <button style={{marginBottom: "10px"}} onClick={() => this.props.sendPM(this.state.user)}>Send Message</button> : null}
+
                     </div>
                 </NavLink>
         )
     }
 }
 
-export default UserBlock;
+const mapStateToProps = state => {
+    return {
+        currentUserId: state.currentUserId,
+        token: state.token
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        sendPM: (user) => dispatch({type: actionTypes.SEND_PM, recipient: user})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserBlock);

@@ -100,7 +100,7 @@ class UserPage extends React.Component {
                             
                             <h1>{this.state.user.name}</h1>
                             {bio}
-                            <button onClick={() => this.props.sendPM(this.state.user)}>Send Message</button>
+                            {this.props.currentUserId && this.props.token ? <button style={{marginBottom: "10px"}} onClick={() => this.props.sendPM(this.state.user)}>Send Message</button> : null}
                         </div>  
                         <div className="postFeed col-sm-7">
                             {this.state.posts.length === 0 ? <h1 style={{textAlign: "center"}}>No posts have been made by this user</h1> : null}
