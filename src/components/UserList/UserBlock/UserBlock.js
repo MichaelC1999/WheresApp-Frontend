@@ -22,7 +22,7 @@ class UserBlock extends React.Component {
                         <h3>{this.props.name}</h3>
                         <h5>{this.props.postTotal} posts total</h5>
                         <p>{this.props.bio}</p>
-                        {this.props.currentUserId && this.props.token ? <button style={{marginBottom: "10px"}} onClick={() => this.props.sendPM(this.state.user)}>Send Message</button> : null}
+                        {this.props.currentUserId && this.props.token ? <button style={{marginBottom: "10px"}} onClick={() => this.props.sendPM({_id: this.props.userId, name: this.props.name})}>Send Message</button> : null}
 
                     </div>
                 </NavLink>
