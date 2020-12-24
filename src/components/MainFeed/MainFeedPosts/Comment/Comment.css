@@ -37,13 +37,13 @@
     }
     .comment > img {
         object-fit: cover;
-        max-width: 10%;
+        min-width: 12%;
         margin-left: 0;
         max-height: 100px;
     }
 
     .comment > p {
-        width: 72%;
+        width: 70%;
     }
     .comment > .commentBtn {
         width: 18%;
