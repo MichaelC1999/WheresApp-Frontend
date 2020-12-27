@@ -30,6 +30,7 @@ class App extends React.Component {
     if (!token || !expiryDate) {
       return;
     }
+    //check if already reached expiry, if expiry has passed, logout. If expiry has not passed and token is still valid, update expiry date to one hour in future
     if (new Date(expiryDate) <= new Date()) {
       this.logoutHandler();
       return;
@@ -68,6 +69,14 @@ class App extends React.Component {
           this.props.setMsg(data.msg)
         }
       })
+    }
+    const expiryDate = localStorage.getItem('expiryDate');
+    if(!expiryDate){
+      return
+    }
+    if (new Date(expiryDate) <= new Date()) {
+      this.logoutHandler();
+      return;
     }
   }
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import check from './check.svg';
+
 import './CommentBox.css';
 
 class CommentInput extends React.Component {
@@ -13,13 +15,24 @@ class CommentInput extends React.Component {
         }
     }
 
+    componentDidUpdate () {
+        if(this.props.submittingEdit === true){
+            this.submitComment()        
+            this.props.cancelEdit()
+
+        }
+    }
+
     stateHandler = (e) => {
         this.setState({comment: e.target.value})
     }
 
-    submitComment = (e) => {
+    submitComment = () => {
 
-        e.preventDefault()
+        if(this.state.comment === this.props.comment){
+            this.props.cancelEdit()
+            return
+        }
 
         if(this.state.comment.length<1){
             this.setState({error: "You need to enter a comment!"})
@@ -65,11 +78,10 @@ class CommentInput extends React.Component {
 
     render() {
         return (
-                <form className="commentBox" onSubmit={this.submitComment.bind()}>
+                <form className="commentBox" >
                     {this.state.error ? <label style={{color: "red"}} for="comment">{this.state.error}</label> : null}
                     <textarea name="comment" value={this.state.comment} onChange={this.stateHandler.bind()} placeholder="Comment here"/>
-                    <button type="submit">Add</button>
-                    {this.props.method==="edit" ? <button onClick={this.props.cancelEdit}>Cancel</button> : null}
+                    {this.props.method!=="edit" ? <div onClick={this.submitComment} ><img style={{margin: "25px", cursor: "pointer", backgroundColor: "rgb(201, 41, 41)", padding: "3px"}} src={check} width="50px" height="50px"/></div> : null}
                 </form>
 
         )

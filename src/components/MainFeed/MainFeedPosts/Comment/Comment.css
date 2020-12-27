@@ -1,9 +1,9 @@
 .comment {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 15px 5px;
     border: 2px black solid;
-    margin: 0 10px 10px 10px;
+    margin: 0 3px 10px 3px;
     background-color: white;
     max-height: 250px;
     overflow: scroll;
@@ -14,15 +14,24 @@
 
 }
 
-.comment > img {
-    width: 40%;
+.comment > div {
     margin-left: 10px;
+    padding-right: 5px;
 }
-.comment > .commentBtn {
-    width: 100%;
+
+.comment > div > img {
+    width: 50px;
 }
-.commentBtn > button {
-    width: 100%;
+.commentBtn {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.commentBtn > div > * {
+    width: 25px;
+    height: 25px;
+    background-color: rgb(201, 41, 41);
 }
 .comment > p {
     width: 80%;
@@ -35,18 +44,20 @@
         max-height: 500px;
 
     }
-    .comment > img {
-        object-fit: cover;
-        max-width: 15%;
+    .comment > div {
         margin-left: 0;
-        max-height: 100px;
+
+    }
+
+    .comment > div > img {
+        object-fit: cover;
+        max-width: 50px;
+        max-height: 50px;
     }
 
     .comment > p {
-        width: 67%;
+        width: calc(82%-40px);
     }
-    .comment > .commentBtn {
-        width: 18%;
-    }
+    
     
 }
