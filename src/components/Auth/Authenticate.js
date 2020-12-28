@@ -172,9 +172,9 @@ class Authenticate extends React.Component {
                         <label style={this.state.name ? {color: "lime"}: null } for="name">Username</label>
                         <input style={this.state.name ? {backgroundColor: "lime", color: "white"} : {border: "red 2px solid"}} type="text" placeholder="Name" name="name" value={this.state.name} onChange={this.updateInput.bind()} /></React.Fragment> : null }
 
-                    <label style={this.state.email.includes('@') && this.state.email.includes('.') ? {color: "black"} : null} for="email" >Email (ex. abc123@gmail.com)</label>
+                    <label style={this.state.email.includes('@') && this.state.email.includes('.') ? {color: "lime"} : null} for="email" >Email (ex. abc123@gmail.com)</label>
                     <input style={this.state.email.includes('@') && this.state.email.includes('.') ? {backgroundColor: "lime", color: "black"} : {border: "red 2px solid"}} type="text" placeholder="Email" name="email" value={this.state.email} onChange={this.updateInput.bind()} />
-                    <label style={this.state.password.length >= 8 && this.state.password.length <= 30 ? {color: "black"} : null} for="password" >Password (8-30 letters)</label>
+                    <label style={this.state.password.length >= 8 && this.state.password.length <= 30 ? {color: "lime"} : null} for="password" >Password (8-30 letters)</label>
                     <input style={this.state.password.length >= 8 && this.state.password.length <= 30 ? {backgroundColor: "lime", color: "black"} : {border: "red 2px solid"}} type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.updateInput.bind()} />
 
                     <button type="submit" >Submit</button>
